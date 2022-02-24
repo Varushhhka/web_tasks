@@ -10,7 +10,7 @@ class RegisterForm(FlaskForm):
     surname = StringField('Surname')
     name = StringField('Name')
     age = IntegerField('Age')
-    position = StringField
+    position = StringField('Position')
     speciality = StringField('Speciality')
     address = TextAreaField("Address")
     submit = SubmitField('Submit')
