@@ -10,6 +10,11 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 
+def main():
+    db_session.global_init("db/mars_explorer.db")
+    app.run()
+
+
 @app.route('/')
 def index():
     db_sess = db_session.create_session()
@@ -40,11 +45,6 @@ def register():
         db_sess.commit()
         return redirect('/login')
     return render_template('register.html', title='Регистрация', form=form)
-
-
-def main():
-    db_session.global_init("db/mars_explorer.db")
-    app.run()
 
 
 if __name__ == '__main__':
