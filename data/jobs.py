@@ -13,11 +13,13 @@ class Jobs(SqlAlchemyBase):
     job = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     work_size = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
     collaborators = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    start_date = sqlalchemy.Column(sqlalchemy.DateTime, nullable=True)
-    end_date = sqlalchemy.Column(sqlalchemy.DateTime, nullable=True)
+    start_date = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    end_date = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     is_finished = sqlalchemy.Column(sqlalchemy.Boolean, default=True)
+    category = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("categories.id"))
 
     user = orm.relation('User')
+    categories = orm.relation("Category", secondary="association", backref="jobs")
 
     def __repr__(self):
         return f'<Job> {self.job}'
