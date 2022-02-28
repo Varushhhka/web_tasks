@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Departments log</h1>
+{% if current_user.is_authenticated %}
+    <a href="/new_department" class="btn btn-secondary">Adding a department</a>
+
+{% endif %}
+    <a href="/" class="btn btn-secondary">Back to jobs</a>
+{% for item in departments%}
+<div class="col-md6 border rounded">
+    <br>
+    <h2>Department #{{item.id}}</h2>
+    <div>
+        <table cellspacing="5" cellpadding="10">
+            <tr>
+                <td class="alert alert-info" role="alert">Tile of department</td>
+                <td class="alert alert-info" role="alert">Chief</td>
+                <td class="alert alert-info" role="alert">Members</td>
+                <td class="alert alert-info" role="alert">Department Email</td>
+            </tr>
+            <tr>
+                <td>{{item.title}}</td>
+                <td>{{item.user.surname}} {{item.user.name}}</td>
+                <td>{{item.members}}</td>
+                <td>{{item.email}}</td>
+            </tr>
+        </table>
+    </div>
+    {% if current_user.is_authenticated and current_user == item.user %}
+    <div>
+        <a href="/new_departments/{{ item.id }}" class="btn btn-warning">
+            Edit department
+        </a>
+        <a href="/departments_delete/{{ item.id }}" class="btn btn-danger">
+            Delete department
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endfor %}
+{% endblock %}
